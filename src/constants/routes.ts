@@ -3,5 +3,5 @@ export enum ROUTES {
     LOGIN = '/login',
     REGISTER = '/register',
     DASHBOARD = '/dashboard',
-
+    PRODUCTS = '/dashboard/products'
 }
