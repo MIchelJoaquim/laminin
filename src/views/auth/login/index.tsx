@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import schema from "./login.validation"
@@ -7,14 +7,17 @@ import TextField from "@material-ui/core/TextField"
 import { Grid } from "@material-ui/core"
 import useStyles from "./login.styles"
 import { LoginFormData } from "./login.types"
-import { authLogin } from "../../../services/auth"
 import { ICredential } from "./../../../types/credential"
 import useAsyncState from "../../../hooks/use-async-state"
 import SnackbarView from "./../../../components/snackbar-view/index"
 import AuthLayout from "./../../../components/auth-layout/index"
 import { useHistory } from "react-router-dom";
+import { AuthContext, AuthContextData } from "../../../context/auth"
+import { ROUTES } from "../../../constants/routes"
 
 const Login: FC = () => {
+  const { handleLogin } = useContext(AuthContext) as AuthContextData;
+
   const classes = useStyles()
   const { setSnackMessage, snackMessage } = useAsyncState()
   const { register, handleSubmit, errors } = useForm({
@@ -23,18 +26,22 @@ const Login: FC = () => {
   const history = useHistory();
 
   const onSubmit = handleSubmit<LoginFormData>((data: ICredential) =>
-    authLogin(data)
-      .then((res) => {
-        setSnackMessage({ message: "Login feito com sucesso!", isError: false })
-      })
-      .catch((error) => {
-        setSnackMessage({ message: error.message, isError: true })
-      })
+      {
+        try {
+          handleLogin(data)
+          .then(res => { setSnackMessage({ message: "Login feito com sucesso!", isError: false })})
+          .catch(error => { setSnackMessage({ message: error.message, isError: true })});
+        } catch (error) {
+          setSnackMessage({ message: "lamentamos ocorreu algum erro, por favor tente novamente!", isError: true });
+        }
+        
+      }
   )
 
   const onRegister = () => {
-    history.push("/register");
+    history.push(ROUTES.REGISTER);
   }
+  
 
   return (
     <AuthLayout>

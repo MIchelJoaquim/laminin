@@ -86,8 +86,8 @@ export const tokenVerify = async (req: Request, res: Response) => {
 
   if (tokenDestruct.length === 0 || tokenDestruct[0] !== process.env.TOKEN_TYPE) {
     res
-      .status(401)
-      .json({ msg: 'Lamentamos, infelizmente ocorreu um erro', error: 'invalid token' });
+      .status(422)
+      .json({ msg: 'Lamentamos,o token que informou é inválido', error: 'invalid token' });
   }
 
   try {

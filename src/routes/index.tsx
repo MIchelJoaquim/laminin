@@ -6,27 +6,39 @@ import {
 
 import Login from '../views/auth/login/index';
 import React from 'react';
-import AuthApi from "../context/auth";
+import { AuthContext } from "../context/auth";
 import SignUp from "../views/auth/sign-up";
+import { AuthContextData } from './../context/auth';
+import { ROUTES } from "../constants/routes";
+import Dashboard from "../views/dashboard";
 
 export const Routes = () => {
-    const Auth = React.useContext(AuthApi);
+    const { authenticated } = React.useContext(AuthContext) as AuthContextData;
 
     return (
         <Switch>
-            <Route exact={true} path="/login" component={Login}/>
-            <Route exact={true} path="/register" component={SignUp}/>
-            <ProtectedRoute exact={true} path="/dashboard" component={Login} isAuthenticated={Auth.auth}/>
-            <ProtectedRoute exact={true} path="/" component={Login} isAuthenticated={Auth.auth}/>
+            <AuthRoute exact={true} path={ROUTES.LOGIN} component={Login} isAuthenticated={authenticated}/>
+            <AuthRoute exact={true} path={ROUTES.REGISTER} component={SignUp} isAuthenticated={authenticated}/>
+            <ProtectedRoute exact={true} path={ROUTES.DASHBOARD} component={Dashboard} isAuthenticated={authenticated}/>
+            <ProtectedRoute exact={true} path={ROUTES.ROOT} component={Login} isAuthenticated={authenticated}/>
 
         </Switch>);
 }
+
+const AuthRoute = ({component, isAuthenticated, ...rest}: any) => {
+    const routeComponent = (props: any) => (
+        !isAuthenticated
+            ? React.createElement(component, props)
+            : <Redirect to={{pathname: ROUTES.DASHBOARD}}/>
+    );
+    return <Route {...rest} render={routeComponent}/>;
+};
 
 export const ProtectedRoute = ({component, isAuthenticated, ...rest}: any) => {
     const routeComponent = (props: any) => (
         isAuthenticated
             ? React.createElement(component, props)
-            : <Redirect to={{pathname: '/login'}}/>
+            : <Redirect to={{pathname: ROUTES.LOGIN}}/>
     );
     return <Route {...rest} render={routeComponent}/>;
 };
