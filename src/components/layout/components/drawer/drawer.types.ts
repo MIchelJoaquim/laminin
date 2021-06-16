@@ -6,7 +6,7 @@ interface MenuItem {
 }
 const menu: MenuItem[] = [
     { label: "Início", url: ROUTES.DASHBOARD },
-    { label: "Produtos", url: ROUTES.PRODUCTS },
+    { label: "Mercados", url: ROUTES.MARKET },
 ];
 
 export default menu;

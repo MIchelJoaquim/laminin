@@ -27,7 +27,7 @@ const Table: FC<TableProps> = ({headCells, rows}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows && rows.map((row) => (
             <StyledTableRow key={v4()}>
               {headCells.map(cell => (
                 <StyledTableCell  key={v4()}>

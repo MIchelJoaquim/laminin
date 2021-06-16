@@ -27,12 +27,12 @@ export const readAllMarket = async (req: Request, res: Response) => {
     const nameIn = removeExtraAspas((req.query.name as string) || '');
     try {
         const markets = await marketModel
-            .find({ name: { $regex: new RegExp(nameIn), $options: 'i' } }, { _id: 0, __v: 0 })
+            .find({ name: { $regex: new RegExp(nameIn), $options: 'i' } }, { __v: 0 })
             .exec();
         res.status(200).json({
             msg: '',
             payload: {
-                markets,
+                data: markets,
             },
             count: markets.length,
         });
