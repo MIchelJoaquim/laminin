@@ -5,14 +5,17 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import { Routes } from './routes';
+import { AuthProvider } from './context/auth';
 
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes/>
-      </Router>
+      <AuthProvider>
+          <Router>
+            <Routes/>
+          </Router>
+      </AuthProvider>
     </div>
   );
 }
