@@ -4,5 +4,5 @@ export interface HeadCell {
 }
 export interface TableProps {
     headCells: HeadCell[];
-    rows: Record<string, string | number>[]
+    rows: Record<string, unknown>[] | null;
 }

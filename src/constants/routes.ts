@@ -3,5 +3,6 @@ export enum ROUTES {
     LOGIN = '/login',
     REGISTER = '/register',
     DASHBOARD = '/dashboard',
-    PRODUCTS = '/dashboard/products'
+    MARKET = '/dashboard/market',
+    MARKET_CREATE = '/dashboard/market/create'
 }
