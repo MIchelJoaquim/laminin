@@ -6,15 +6,18 @@ import {
 } from "react-router-dom";
 import { Routes } from './routes';
 import { AuthProvider } from './context/auth';
+import Layout from './components/layout/index';
 
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
-          <Router>
+      <Router>
+        <Layout>
             <Routes/>
-          </Router>
+        </Layout>
+        </Router>
       </AuthProvider>
     </div>
   );
