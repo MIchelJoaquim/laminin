@@ -26,10 +26,18 @@ export const createHistoric = async (req: Request, res: Response) => {
 };
 
 export const readAllHistoric = async (req: Request, res: Response) => {
+    const productName = (req.query.product as string) || '';
+    const market = (req.query.market as string) || '';
     try {
 
         const historic = await historicModel.aggregate([
             { $lookup: { from: 'markets', localField: 'market', foreignField: '_id', as: 'market' } },
+            {
+                $match: {
+                    "productName": { $regex: productName, $options: 'i' },
+                    "market.name": { $regex: market, $options: 'i' },
+                }
+            },
             {
                 $unwind: '$market',
             },

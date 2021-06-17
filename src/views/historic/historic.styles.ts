@@ -8,7 +8,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         containerButton: {
             paddingTop: theme.spacing(3)
-        }
+        },
+        formControl: {
+            margin: theme.spacing(1),
+            width: '100%',
+        },
     }),
 );
 
