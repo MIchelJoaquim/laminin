@@ -15,12 +15,12 @@ router.get('/auth/verify', tokenVerify);
 
 router.post('/auth/register', signup);
 
-router.post('/market', validateJWT, createMarket);
+router.post('/market', createMarket);
 
-router.get('/market', validateJWT, readAllMarket);
+router.get('/market', readAllMarket);
 
-router.get('/historic', validateJWT, readAllHistoric);
+router.get('/historic', readAllHistoric);
 
-router.post('/historic', validateJWT, createHistoric);
+router.post('/historic', createHistoric);
 
 export default router;
