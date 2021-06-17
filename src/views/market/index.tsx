@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import Table from "../../components/table";
 import { HeadCell } from '../../components/table/table.types';
 import { getAllMarket } from './../../services/market/index';
-import { Grid } from '@material-ui/core';
-import Button  from '@material-ui/core/Button';
+import { Grid, Button } from '@material-ui/core';
 import useStyles from './market.styles';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
@@ -12,7 +11,7 @@ const Market: FC = () => {
     const classes = useStyles();
     const [rows, setRows] = useState<Record<string, unknown>[] | null>(null);
     const headCells: HeadCell[] = [
-        {label: "#", id: "_id"}, 
+        {label: "#", id: "id"}, 
         {label: "Name", id: "name"}, 
     ];
 

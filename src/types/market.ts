@@ -1,4 +1,7 @@
 export interface IMarket {
-    id?: string;
+    id: string;
+    name: string;
+}
+export interface IMarketCreation {
     name: string;
 }

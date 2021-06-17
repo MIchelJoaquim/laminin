@@ -29,10 +29,15 @@ export const readAllMarket = async (req: Request, res: Response) => {
         const markets = await marketModel
             .find({ name: { $regex: new RegExp(nameIn), $options: 'i' } }, { __v: 0 })
             .exec();
+
+        const marketsSend = markets.map(market => ({
+            id: market._id,
+            name: market.name
+        }));
         res.status(200).json({
             msg: '',
             payload: {
-                data: markets,
+                data: marketsSend,
             },
             count: markets.length,
         });
