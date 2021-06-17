@@ -44,11 +44,9 @@ const useAuth = () => {
                 setUser(user);
             } catch (error) {
                 setUser(null);
-            } finally {
-                setLoading(false);
             }
-
         }
+        setLoading(false);
     }
 
     useEffect(() => {

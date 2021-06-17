@@ -10,7 +10,10 @@ import { AuthContext } from "../context/auth";
 import SignUp from "../views/auth/sign-up";
 import { AuthContextData } from './../context/auth';
 import { ROUTES } from "../constants/routes";
-import Dashboard from "../views/dashboard";
+import Dashboard from "../views/historic";
+import Market from "../views/market";
+import CreateMarket from './../views/market/views/create/index';
+import CreateHistoric from './../views/historic/views/create/index';
 
 export const Routes = () => {
     const { authenticated } = React.useContext(AuthContext) as AuthContextData;
@@ -20,6 +23,9 @@ export const Routes = () => {
             <AuthRoute exact={true} path={ROUTES.LOGIN} component={Login} isAuthenticated={authenticated}/>
             <AuthRoute exact={true} path={ROUTES.REGISTER} component={SignUp} isAuthenticated={authenticated}/>
             <ProtectedRoute exact={true} path={ROUTES.DASHBOARD} component={Dashboard} isAuthenticated={authenticated}/>
+            <ProtectedRoute exact={true} path={ROUTES.HISTORIC_CREATE} component={CreateHistoric} isAuthenticated={authenticated}/>
+            <ProtectedRoute exact={true} path={ROUTES.MARKET} component={Market} isAuthenticated={authenticated}/>
+            <ProtectedRoute exact={true} path={ROUTES.MARKET_CREATE} component={CreateMarket} isAuthenticated={authenticated}/>
             <ProtectedRoute exact={true} path={ROUTES.ROOT} component={Login} isAuthenticated={authenticated}/>
 
         </Switch>);
